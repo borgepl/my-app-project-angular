@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Ingredient } from 'src/app/model/ingredient';
@@ -10,9 +10,13 @@ import { ShoppingListService } from '../shopping-list.service';
   styleUrls: ['./shopping-edit.component.css'],
   encapsulation: ViewEncapsulation.Emulated // default
 })
-export class ShoppingEditComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ShoppingEditComponent implements OnInit, AfterViewChecked, OnDestroy {
 
-  @ViewChild('f', {read: NgForm, static:true}) slForm!: NgForm;
+  //private slForm: NgForm;
+  //@ViewChild('f', {static: true}) set formRef(formRef: NgForm) { this.slForm= formRef;}
+  
+  @ViewChild('f', {read: NgForm}) slForm!: NgForm;
+  //@ViewChild('f') slForm!: NgForm;
   subscription : Subscription;
   editMode = false;
   editedItemIndex: number;
@@ -21,36 +25,31 @@ export class ShoppingEditComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private slService: ShoppingListService) { }
 
   ngOnInit(): void {
+   
+  }
+
+  ngAfterViewChecked(): void {
     this.subscription = this.slService.startedEditing.subscribe(
       (index: number) => {
         this.editMode = true;
         this.editedItemIndex = index;
         this.editedItem = this.slService.getIngredient[index];
         console.log(this.editMode, this.editedItemIndex);
-        // this.slForm.setValue({
-        //   name:this.editedItem.name,
-        //   amount:this.editedItem.amount
-        // });
+        //console.log(this.slForm);
+        //this.slForm.reset();
+      //  this.slForm.setValue({
+      //    name:this.editedItem.name,
+      //     amount:this.editedItem.amount
+      //   });
         //this.InitForm();
       }
     );
   }
 
-  ngAfterViewInit(): void {
-    if (this.editMode) {
-      setTimeout(() => {
-      console.log(this.slForm);  
-      this.slForm.setValue({
-        amount: this.editedItem.amount,
-        name: this.editedItem.name
-      });
-      },0);
-   }
-  }
-
   InitForm(): void {
 
-    this.slForm.controls['name'].setValue(this.editedItem.name);
+    this.slForm.form.controls['name'].setValue(this.editedItem.name);
+    this.slForm.form.controls['ammount'].setValue(this.editedItem.amount);
 }
 
   onAddItem(form: NgForm) {
@@ -58,7 +57,23 @@ export class ShoppingEditComponent implements OnInit, AfterViewInit, OnDestroy {
     const ingName = value.name;
     const ingAmount = value.amount;
     const newIngredient = new Ingredient(ingName, ingAmount);
-    this.slService.addIngredient(newIngredient);
+    if (this.editMode) {
+      this.slService.updateIngredient(this.editedItemIndex , newIngredient);
+    } else {
+      this.slService.addIngredient(newIngredient);
+    }
+    this.editMode = false;
+    form.reset();
+  }
+
+  onClear() {
+    this.slForm.reset();
+    this.editMode = false;
+  }
+
+  onDelete() {
+    this.slService.deleteIngredient(this.editedItemIndex);
+    this.onClear();
   }
 
   ngOnDestroy(): void {
