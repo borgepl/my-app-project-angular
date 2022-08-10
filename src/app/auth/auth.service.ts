@@ -18,7 +18,7 @@ export interface AuthResponseData {
 export class AuthService {
 
     authUser = new BehaviorSubject<User>(null);
-
+    private tokenExpirationTimer: any;
     
     constructor(private http: HttpClient, private router: Router) {}
 
@@ -47,6 +47,11 @@ export class AuthService {
     logout() {
         this.authUser.next(null);
         this.router.navigate(['/auth']);
+        localStorage.removeItem('userData');
+        if (this.tokenExpirationTimer) {
+            clearTimeout(this.tokenExpirationTimer);
+        }
+        this.tokenExpirationTimer = null;
     }
 
     autoLogin() {
@@ -60,7 +65,13 @@ export class AuthService {
         
         if (loadedUser.token) {
             this.authUser.next(loadedUser);
+            const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
+            this.autoLogout(expirationDuration);
         }    
+    }
+
+    autoLogout(expirationDuration: number) {
+        this.tokenExpirationTimer = setTimeout(() => {this.logout} ,expirationDuration)
     }
 
     private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
@@ -69,6 +80,7 @@ export class AuthService {
         const user = new User(email, userId, token, expirationDate);
         console.log(user);
         this.authUser.next(user);
+        this.autoLogout(expiresIn * 1000); // timer - timeout function is set in millisecs.
         localStorage.setItem('userData', JSON.stringify(user));
     }
 
