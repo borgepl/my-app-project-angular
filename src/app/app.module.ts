@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from  '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from  '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { WarningAlertComponent } from './components/warning-alert/warning-alert.component';
@@ -22,6 +22,7 @@ import { RecipeEditComponent } from './components/recipes/recipe-edit/recipe-edi
 import { DataStorageService } from './components/shared/data-storage.service';
 import { AuthComponent } from './auth/auth.component';
 import { LoadingSpinnerComponent } from './components/shared/loading-spinner/loading-spinner.component';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 
 @NgModule({
@@ -49,7 +50,9 @@ import { LoadingSpinnerComponent } from './components/shared/loading-spinner/loa
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ShoppingListService,RecipeService, DataStorageService],
+  providers: [ShoppingListService,RecipeService, DataStorageService,
+              {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
