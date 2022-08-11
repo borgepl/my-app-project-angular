@@ -7,24 +7,19 @@ import { AppComponent } from './app.component';
 import { WarningAlertComponent } from './components/shared/warning-alert/warning-alert.component';
 import { InfoAlertComponent } from './components/shared/info-alert/info-alert.component';
 import { HeaderComponent } from './components/header/header.component';
-import { RecipesComponent } from './components/recipes/recipes.component';
-import { RecipeListComponent } from './components/recipes/recipe-list/recipe-list.component';
-import { RecipeDetailComponent } from './components/recipes/recipe-detail/recipe-detail.component';
-import { RecipeItemComponent } from './components/recipes/recipe-list/recipe-item/recipe-item.component';
 import { ShoppingEditComponent } from './components/shopping-list/shopping-edit/shopping-edit.component';
 import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
 import { DropdownDirective } from './components/shared/dropdown.directive';
 import { ShoppingListService } from './components/shopping-list/shopping-list.service';
 import { RecipeService } from './components/recipes/recipe.service';
 import { AppRoutingModule } from './app-routing.module';
-import { RecipeStartComponent } from './components/recipes/recipe-start/recipe-start.component';
-import { RecipeEditComponent } from './components/recipes/recipe-edit/recipe-edit.component';
 import { DataStorageService } from './components/shared/data-storage.service';
 import { AuthComponent } from './auth/auth.component';
 import { LoadingSpinnerComponent } from './components/shared/loading-spinner/loading-spinner.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AlertComponent } from './components/shared/alert/alert.component';
 import { PlaceholderDirective } from './components/shared/placeholder/placeholder.directive';
+import { RecipesModule } from './components/recipes/recipes.module';
 
 
 @NgModule({
@@ -33,15 +28,11 @@ import { PlaceholderDirective } from './components/shared/placeholder/placeholde
     WarningAlertComponent,
     InfoAlertComponent,
     HeaderComponent,
-    RecipesComponent,
-    RecipeListComponent,
-    RecipeDetailComponent,
-    RecipeItemComponent,
+    
     ShoppingListComponent,
     ShoppingEditComponent,
     DropdownDirective,
-    RecipeStartComponent,
-    RecipeEditComponent,
+    
     AuthComponent,
     LoadingSpinnerComponent,
     AlertComponent,
@@ -52,7 +43,8 @@ import { PlaceholderDirective } from './components/shared/placeholder/placeholde
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RecipesModule
   ],
   providers: [ShoppingListService,RecipeService, DataStorageService,
               {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
