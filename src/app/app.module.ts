@@ -4,8 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from  '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { WarningAlertComponent } from './components/warning-alert/warning-alert.component';
-import { InfoAlertComponent } from './components/info-alert/info-alert.component';
+import { WarningAlertComponent } from './components/shared/warning-alert/warning-alert.component';
+import { InfoAlertComponent } from './components/shared/info-alert/info-alert.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RecipesComponent } from './components/recipes/recipes.component';
 import { RecipeListComponent } from './components/recipes/recipe-list/recipe-list.component';
@@ -23,6 +23,8 @@ import { DataStorageService } from './components/shared/data-storage.service';
 import { AuthComponent } from './auth/auth.component';
 import { LoadingSpinnerComponent } from './components/shared/loading-spinner/loading-spinner.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { AlertComponent } from './components/shared/alert/alert.component';
+import { PlaceholderDirective } from './components/shared/placeholder/placeholder.directive';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
     RecipeStartComponent,
     RecipeEditComponent,
     AuthComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    AlertComponent,
+    PlaceholderDirective
   ],
   imports: [
     BrowserModule,
