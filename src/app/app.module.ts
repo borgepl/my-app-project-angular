@@ -7,8 +7,6 @@ import { AppComponent } from './app.component';
 import { WarningAlertComponent } from './components/shared/warning-alert/warning-alert.component';
 import { InfoAlertComponent } from './components/shared/info-alert/info-alert.component';
 import { HeaderComponent } from './components/header/header.component';
-import { ShoppingEditComponent } from './components/shopping-list/shopping-edit/shopping-edit.component';
-import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
 import { DropdownDirective } from './components/shared/dropdown.directive';
 import { ShoppingListService } from './components/shopping-list/shopping-list.service';
 import { RecipeService } from './components/recipes/recipe.service';
@@ -20,17 +18,16 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AlertComponent } from './components/shared/alert/alert.component';
 import { PlaceholderDirective } from './components/shared/placeholder/placeholder.directive';
 import { RecipesModule } from './components/recipes/recipes.module';
+import { ShoppingListModule } from './components/shopping-list/shopping-list.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent, 
+    HeaderComponent,
     WarningAlertComponent,
     InfoAlertComponent,
-    HeaderComponent,
-    
-    ShoppingListComponent,
-    ShoppingEditComponent,
+   
     DropdownDirective,
     
     AuthComponent,
@@ -44,7 +41,8 @@ import { RecipesModule } from './components/recipes/recipes.module';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    RecipesModule
+    RecipesModule,
+    ShoppingListModule
   ],
   providers: [ShoppingListService,RecipeService, DataStorageService,
               {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
