@@ -1,0 +1,20 @@
+.my-footer {
+    position: fixed; 
+    bottom: 0;
+    background: #eee;
+    border-top: 1px solid #bdbdbd;
+    box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.12), 0 0 0 rgba(0, 0, 0, 0.24);
+    color: #333;
+    height: 50px;
+    overflow: hidden;
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+
+    span > strong {
+        color: #004494;
+        font-weight: bold;
+    }
+
+    
+}

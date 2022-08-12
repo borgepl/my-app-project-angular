@@ -10,12 +10,14 @@ import { DataStorageService } from './components/shared/data-storage.service';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { SharedModule } from './components/shared/shared.module';
 import { AuthModule } from './auth/auth.module';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent, 
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

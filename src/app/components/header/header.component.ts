@@ -11,6 +11,7 @@ import { DataStorageService } from '../shared/data-storage.service';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   isAuthenticated = false;
+  authenticatedUser = ' - ';
   private userSub : Subscription;
 
   constructor( private dataStore : DataStorageService, private authService: AuthService) { }
@@ -18,6 +19,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userSub = this.authService.authUser.subscribe(user => {
       this.isAuthenticated = !user ? false : true
+      if (user) {
+        this.authenticatedUser = user.email;
+      }
+      
     });
   }
 
