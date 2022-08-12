@@ -4,6 +4,7 @@ import { catchError, tap } from "rxjs/operators";
 import { BehaviorSubject, Subject, throwError } from "rxjs";
 import { User } from "./user.model";
 import { Router } from "@angular/router";
+import { environment } from "src/environments/environment";
 
 export interface AuthResponseData {
     idToken: string,
@@ -25,7 +26,8 @@ export class AuthService {
     base_url = 'https://identitytoolkit.googleapis.com/v1/accounts:'
     login_url = 'signInWithPassword?key='
     signUp_url = 'signUp?key='
-    API_KEY = 'AIzaSyDffrLZE7jkH1xqwNxpHez8GRhENMGzAtw' //ng-recipebook project in FireBase
+    // API_KEY = 'AIzaSyDffrLZE7jkH1xqwNxpHez8GRhENMGzAtw' //ng-recipebook project in FireBase
+    API_KEY = environment.firebaseAPI_KEY;
 
     signUp(email: string, password: string) {
         return this.http
