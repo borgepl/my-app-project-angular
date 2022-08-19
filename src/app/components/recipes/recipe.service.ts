@@ -5,7 +5,7 @@ import { Ingredient } from "src/app/model/ingredient";
 import { Recipe } from "src/app/model/recipe";
 import { ShoppingListService } from "../shopping-list/shopping-list.service";
 import * as ShoppingListActions from 'src/app/components/shopping-list/store/shopping-list.actions';
-import * as fromShoppingList from '../shopping-list/store/shopping-list.reducer';
+import * as fromApp from 'src/app/store/app.reducer';
 
 @Injectable()
 export class RecipeService {
@@ -36,7 +36,7 @@ recipesChanged = new Subject<Recipe[]>();
 private recipes: Recipe[] = [];
 
 constructor(private slService: ShoppingListService, 
-            private store: Store<fromShoppingList.AppState>) {}
+            private store: Store<fromApp.AppState>) {}
 
 setRecipes(recipes : Recipe[]) {
    this.recipes = recipes;
