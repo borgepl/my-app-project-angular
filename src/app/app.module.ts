@@ -11,6 +11,8 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { SharedModule } from './components/shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { FooterComponent } from './components/footer/footer.component';
+import { StoreModule } from '@ngrx/store';
+import { ShoppingListReducer } from './components/shopping-list/store/shopping-list.reducer';
 
 
 @NgModule({
@@ -22,6 +24,7 @@ import { FooterComponent } from './components/footer/footer.component';
   imports: [
     BrowserModule,
     HttpClientModule,
+    StoreModule.forRoot({shoppingList : ShoppingListReducer}),
     AppRoutingModule,
     SharedModule,
     AuthModule
