@@ -13,6 +13,8 @@ import { AuthModule } from './auth/auth.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { StoreModule } from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './auth/store/auth.effects';
 
 
 @NgModule({
@@ -25,6 +27,7 @@ import * as fromApp from './store/app.reducer';
     BrowserModule,
     HttpClientModule,
     StoreModule.forRoot(fromApp.appReducers),
+    EffectsModule.forRoot([AuthEffects]),
     AppRoutingModule,
     SharedModule,
     AuthModule
