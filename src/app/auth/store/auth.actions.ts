@@ -7,7 +7,7 @@ import { Action, createAction, props } from "@ngrx/store";
 //export const SIGNUP_START = 'SIGNUP START';
 
 export const LOGIN_START = createAction('LOGIN START', props<{ payload : {email: string; password: string}}>());
-export const AUTHENTICATE_SUCCESS = createAction('AUTH SUCCESS', props<{payload : {email: string; userId: string; token: string; expirationDate: Date}}>());
+export const AUTHENTICATE_SUCCESS = createAction('AUTH SUCCESS', props<{payload : {email: string; userId: string; token: string; expirationDate: Date, redirect: boolean}}>());
 export const AUTHENTICATE_FAIL = createAction('AUTH FAILED',props<{payload : string}>());
 export const LOGOUT = createAction('LOGOUT');
 export const SIGNUP_START = createAction('SIGNUP START', props<{payload: {email: string; password: string}}>());

@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { DataStorageService } from '../shared/data-storage.service';
 import * as fromApp from '../../store/app.reducer';
 import * as AuthActions from "src/app/auth/store/auth.actions";
+import * as RecipeActions from "../recipes/store/recipes.actions";
 
 @Component({
   selector: 'app-header',
@@ -38,11 +39,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onSaveData() {
-    this.dataStore.storeRecipes();
+    //this.dataStore.storeRecipes();
+    this.store.dispatch(RecipeActions.STORE_RECIPES());
   }
 
   onFetchData() {
-    this.dataStore.fetchRecipes().subscribe();
+    //this.dataStore.fetchRecipes().subscribe();
+    this.store.dispatch(RecipeActions.FETCH_RECIPES());
   }
 
   ngOnDestroy(): void {
